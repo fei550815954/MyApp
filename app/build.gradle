@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "cn.kingcd.myapplication"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']//显示lisbs
+            assets.srcDirs = ['assets', 'src/main/assets', 'src/main/assets/']//显示assets
+            jni.srcDirs = ['src/main/jni', 'src/main/jni/']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false //混淆开关
+            shrinkResources false//不打包无用的资源文件 必须开启混淆
+//            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    signingConfigs {
+        debug {
+            storeFile file('jinrong.keystore')
+            storePassword "4001877369"
+            keyAlias "jinrong"
+            keyPassword "4001877369"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'com.jakewharton:butterknife:9.0.0-rc1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+    //版本号使用 + 可以自动引用最新版，网络请求框架
+    implementation 'com.lzy.net:okgo:3.0.4'
+    //无限轮播框架
+    implementation 'com.jude:rollviewpager:1.4.6'
+    implementation 'com.youth.banner:banner:1.4.10'
+    //eventBus和加强性能插件
+    implementation 'de.greenrobot:eventbus:3.0.0-beta1'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    //下拉刷新上拉加载
+    implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    //加载框架
+    implementation 'com.github.ForgetAll:LoadingDialog:v1.0.4'
+    //多条件帅选菜单
+    implementation 'com.github.dongjunkun:DropDownMenu:1.0.4'
+    implementation 'org.greenrobot:greendao:3.2.0'
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    //二维码
+    implementation 'com.google.zxing:core:3.2.1'
+    //阿里巴巴解析框架
+    implementation 'com.alibaba:fastjson:1.2.31'
+    //可以加载gif,旋转放大图片
+    implementation 'me.xiaopan:sketch:2.4.0'
+    implementation 'com.kingja.loadsir:loadsir:1.2.0'
+//log日志框架
+    implementation 'com.orhanobut:logger:2.1.1'
+    //toast
+    implementation 'com.hjq:toast:3.0'
+}
